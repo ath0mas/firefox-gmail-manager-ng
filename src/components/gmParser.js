@@ -306,8 +306,10 @@ gmParser.prototype = {
     var results = null;
     try {
       // Evaluate the XPath expression
-      var xpathEvaluator = Components.classes["@mozilla.org/dom/xpath-evaluator;1"].createInstance(Components.interfaces.nsIDOMXPathEvaluator);
-      results = xpathEvaluator.evaluate(aExpression, aNode, null, aType, null);
+      //var xpathEvaluator = Components.classes["@mozilla.org/dom/xpath-evaluator;1"].createInstance(Components.interfaces.nsIDOMXPathEvaluator);
+      //results = xpathEvaluator.evaluate(aExpression, aNode, null, aType, null);
+      var aDoc = aNode.ownerDocument ? aNode.ownerDocument : aNode;
+      results = aDoc.evaluate(aExpression, aNode, null, aType, null);
     } catch(e) {}
     return results;
   },
