@@ -114,7 +114,7 @@ gmServiceGmail.prototype = {
     var loginData = {
       "service" : "mail",
       "continue" : encodeURIComponent(this._checkURL + (aContinueData || "")),
-      "Email" : encodeURIComponent(this.isHosted ? this.username : this.email),
+      "Email" : encodeURIComponent(this.email),
       "Passwd" : encodeURIComponent(aPassword)
     };
     
@@ -215,16 +215,16 @@ gmServiceGmail.prototype = {
     this._username = this.email.split("@")[0];
     this._domain = this.email.split("@")[1];
     
+    this._loginURL = "https://accounts.google.com/ServiceLoginAuth?service=mail";
+
     // Check if the email is hosted
     if (this.isHosted)
     {
-      this._loginURL = "https://www.google.com/a/" + this.domain + "/LoginAction2?service=mail";
       this._checkURL = "https://mail.google.com/a/" + this.domain + "/?";
       this._atomURL = "https://mail.google.com/a/" + this.domain + "/feed/atom/";
     }
     else
     {
-      this._loginURL = "https://accounts.google.com/ServiceLoginAuth?service=mail";
       this._checkURL = "https://mail.google.com/mail/?";
       this._atomURL = "https://mail.google.com/mail/feed/atom/";
     }
